@@ -1,0 +1,12 @@
+{
+  "name": "find-on-database",
+  "version": "1.0.0",
+  "description": "Um Projeto Simples para encontrar uma informação em um Banco de Dados Firebird, por exemplo, uma coluna com nome específico, um registro, ou uma tabela",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Uriel H. Belo",
+  "license": "ISC"
+}
