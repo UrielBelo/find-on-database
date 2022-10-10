@@ -5,5 +5,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     search_value: (search) => ipcRenderer.send('search-value', search),
     openFile: () => ipcRenderer.invoke('dialog:openFile'),
     onConnection_database: (callback) => ipcRenderer.on('database-connection',callback),
-    onSearch_value:(callback) => ipcRenderer.on('search-value',callback)
+    onSearch_value:(callback) => ipcRenderer.on('search-value',callback),
+    onRows_update:(callback) => ipcRenderer.on('rows_update',callback)
 })

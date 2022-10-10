@@ -88,9 +88,18 @@ window.electronAPI.onSearch_value( (_event, value) => {
             })
         }
     }
+    if(data.length > 0){
+        for(d of data){
+            console.log(d)
+        }
+    }
 
 
     updateTables()
+})
+
+window.electronAPI.onRows_update( (_event,value) => {
+    console.log(value)
 })
 
 //Funções do sistema

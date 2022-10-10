@@ -61,7 +61,7 @@ app.on('ready', () => {
             collumns = await find.findCollumnsOnTable(system,search.find)
         }
         if(search.data){
-            data = await find.findCollumnsOnTable(system,search.find)
+            data = await find.findDataOnTable(system,search.find,win)
         }
         win.webContents.send('search-value',{tables: tables,collumns: collumns,data: data})
     })

@@ -264,7 +264,6 @@ input:focus{
 #collumnsTable table{
     background-color: #FFF;
     width: 172px;
-    height: 330px;
     max-height: 330px;
     border-radius: 0px 0px 10px 0px;
     overflow: scroll;
@@ -281,13 +280,13 @@ input:focus{
 #dataTable table{
     background-color: #FFF;
     width: 261px;
-    height: 330px;
     max-height: 330px;
     border-radius: 0px 0px 10px 0px;
     overflow: scroll;
 }
 .tableDiv{
     max-height: 356px;
+    height: 354px;
     overflow-y: scroll;
 }
 .tableDiv td{

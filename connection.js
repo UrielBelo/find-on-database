@@ -20,7 +20,6 @@ function getDatabase(dbInfo){
 function executeQueryOnFirebird(query,database){
     return new Promise( async (resolve,reject) => {
         try{
-            console.log(database)
             database.query(query, (err,result) => {
                 if(err){
                     console.error('Erro ao executar query: ' + err);
