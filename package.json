@@ -1,0 +1,21 @@
+{
+  "name": "find-on-database",
+  "version": "1.0.0",
+  "description": "Um Projeto Simples para encontrar uma informação em um Banco de Dados Firebird, por exemplo, uma coluna com nome específico, um registro, ou uma tabela",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "electron index.js",
+    "start":"node index.js"
+  },
+  "keywords": [],
+  "author": "Uriel H. Belo",
+  "license": "ISC",
+  "dependencies": {
+    "electron-reload": "^2.0.0-alpha.1",
+    "node-firebird": "^1.0.0"
+  },
+  "devDependencies": {
+    "electron": "^19.0.7"
+  }
+}
