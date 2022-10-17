@@ -2,6 +2,7 @@ const find = require('./find')
 const connection = require('./connection')
 const {app,BrowserWindow,nativeImage,ipcMain, dialog} = require('electron')
 const path = require('path')
+
 require('electron-reload')(__dirname,{
     electron: require(`${__dirname}/node_modules/electron`)
 })

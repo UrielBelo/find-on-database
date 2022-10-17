@@ -6,14 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "electron index.js",
-    "start":"node index.js"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "Uriel H. Belo",
   "license": "ISC",
   "dependencies": {
     "electron-reload": "^2.0.0-alpha.1",
-    "node-firebird": "^1.0.0"
+    "node-firebird": "^1.0.0",
+    "sqlite3": "^5.1.2"
   },
   "devDependencies": {
     "electron": "^19.0.7"

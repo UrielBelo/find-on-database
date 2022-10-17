@@ -35,7 +35,8 @@ function findCollumnsOnTable(db,collumn){
 function getAllCollumnsInDatabase(db){
     return new Promise( async (resolve,reject) => {
         try{
-            const collumns = await sql.executeQueryOnFirebird(`SELECT rrf."RDB$FIELD_NAME",rrf."RDB$RELATION_NAME",rf."RDB$FIELD_TYPE" FROM RDB$RELATION_FIELDS rrf
+            const collumns = await sql.executeQueryOnFirebird(`SELECT rrf."RDB$FIELD_NAME",rrf."RDB$RELATION_NAME",rf."RDB$FIELD_TYPE",rf."RDB$FIELD_SUB_TYPE" 
+			FROM RDB$RELATION_FIELDS rrf
             INNER JOIN RDB$FIELDS rf ON rrf.RDB$FIELD_SOURCE = rf."RDB$FIELD_NAME" 
             WHERE (rrf."RDB$SYSTEM_FLAG" = 0) OR (rrf."RDB$SYSTEM_FLAG" IS NULL)
             ORDER BY rrf."RDB$FIELD_NAME"`,db)
@@ -69,7 +70,7 @@ function findDataOnTable(db,dt,win){
                 const collumn = collumns[cl].RDB$FIELD_NAME.replace(/ /g,'')
                 const table = collumns[cl].RDB$RELATION_NAME.replace(/ /g,'')
                 const collumnType = collumns[cl].RDB$FIELD_TYPE
-
+                const collumnSubType = collumns[cl].RDB$FIELD_SUB_TYPE
                 let query
                 switch (collumnType) {
                     case 7:
@@ -94,14 +95,17 @@ function findDataOnTable(db,dt,win){
                     case 35:
                         query = `SELECT ${collumn} FROM ${table} WHERE
                         CAST(${collumn} AS VARCHAR(24)) LIKE '%${dt}%'`
-                    default:
-                        console.log('TIPO BLOB')
+                    case 261:
+                        if(collumnSubType == 1 || collumnSubType == 2){
+                            query = `SELECT ${collumn} FROM ${table} WHERE
+                            ${collumn} CONTAINING '%${dt}%'`
+                        }
                         break;
                 }
                 const data = query != undefined ? await sql.executeQueryOnFirebird(query,db) : []
 
                 if(data.length > 0){
-                    results.push({tb: table, dt: data})
+                    results.push({tb: table, cl: collumn, dt: data})
                 }
 
                 win.webContents.send('rows_update',{find: contador, total: allRegistersOnDatabase})
