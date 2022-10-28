@@ -12,9 +12,14 @@ const $checkData = document.getElementById('checkData')
 const $tablesTable = document.getElementById('tablesTableElement')
 const $collumnsTable = document.getElementById('collumnsTableElement')
 const $dataTable = document.getElementById('dataTableElement')
+const $dropbtn = document.getElementById('dropbtn')
+const $dropdownContent = document.getElementById('dropdownContent')
+const $addProfile = document.getElementById('addProfile')
+const $subProfile = document.getElementById('subProfile')
 const $check = [...document.getElementsByClassName('check')]
 const $main = document.getElementsByTagName('main')[0]
 const $header = document.getElementsByTagName('header')[0]
+const $footer = document.getElementsByTagName('footer')[0]
 const $body = document.getElementsByTagName('body')[0]
 
 const globalObject = {
@@ -22,6 +27,9 @@ const globalObject = {
     collumns: [],
     data: []
 }
+const profiles = []
+
+let currentProfile = 0
 
 $powerButton.addEventListener('mousedown', () => {
     connectOnDatabase()
@@ -49,6 +57,18 @@ for(c in $check){
     })
 }
 
+$eyeButton.addEventListener('mousedown', (ev) => {
+    if($passwordInput.type === 'password'){
+        $passwordInput.type = 'text'
+        $eyeButton.getElementsByTagName('svg')[0].setAttribute('stroke','lime')
+        $eyeButton.getElementsByTagName('svg')[0].setAttribute('stroke-width','1px')
+    }else{
+        $passwordInput.type = 'password'
+        $eyeButton.getElementsByTagName('svg')[0].setAttribute('stroke','black')
+        $eyeButton.getElementsByTagName('svg')[0].setAttribute('stroke-width','1px')
+    }
+})
+
 $searchBarSubmit.addEventListener('mousedown', () => {
     const dataToFind = {
         find: $searchBarText.value,
@@ -62,6 +82,35 @@ $searchBarSubmit.addEventListener('mousedown', () => {
     }
 
     window.electronAPI.search_value(dataToFind)
+})
+$addProfile.addEventListener('mousedown', async (ev) => {
+    const path = $databasePath.value
+    const user = $userInput.value
+    const pass = $passwordInput.value
+
+    const name = await getPrompt()
+
+    if(name){
+        window.electronAPI.addProfile({
+            id: profiles[profiles.length-1].id + 1,
+            path: path,
+            user: user,
+            pass: pass,
+            name: name
+        })
+    }
+})
+
+$subProfile.addEventListener('mousedown', async (ev) => {
+    if(currentProfile != 0){
+        window.electronAPI.removeProfile(currentProfile)
+    }
+    currentProfile = 0
+
+    $databasePath.value = profiles[currentProfile].path
+    $userInput.value = profiles[currentProfile].user
+    $passwordInput.value = profiles[currentProfile].pass
+    $dropbtn.innerHTML = profiles[currentProfile].name
 })
 
 // RETORNOS
@@ -140,8 +189,83 @@ window.electronAPI.onRows_update( (_event,value) => {
     createMask(6,1.4)
     printProgress(value.find,value.total)
 })
+window.electronAPI.onLoadProfiles( (_event,value) => {
+    while(profiles.length > 0){
+        profiles.pop()
+    }
+
+    profiles.push({
+        id: 0,
+        name: 'Empty',
+        path: null,
+        user: null,
+        pass: null
+    })
+    for(i of value){
+        profiles.push({
+            id: i.profile_id,
+            name: i.profile_name,
+            path: i.profile_path,
+            user: i.profile_user,
+            pass: i.profile_pass
+        })
+    }
+    renderProfiles()
+})
 
 //Funções do sistema
+
+async function getPrompt(){
+    return new Promise( async (resolve,reject) => {
+        const $filter = document.createElement('div')
+        $filter.style.width = '100vw'
+        $filter.style.height = '100vh'
+        $filter.style.display = 'flex'
+        $filter.style.justifyContent = 'center'
+        $filter.style.alignItems = 'center'
+        $filter.style.position = 'absolute'
+        $filter.style.top = '0'
+        $filter.style.backgroundColor = 'rgba(230,230,230,0.5)'
+
+        const $prompt = document.createElement('div')
+        $prompt.style.width = '350px'
+        $prompt.style.height = '50px'
+        $prompt.setAttribute('id','namePrompt')
+
+        const $confirm = document.createElement('button')
+        $confirm.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" stroke= class="bi bi-check" viewBox="0 0 16 16">
+            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+        </svg>`
+        $confirm.classList.add('confirm')
+
+        const $cancel = document.createElement('button')
+        $cancel.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+        </svg>`
+        $cancel.classList.add('cancel')
+
+        const $nameInput = document.createElement('input')
+        $nameInput.setAttribute('type','text')
+        $nameInput.setAttribute('placeholder','Nome da Profile')
+
+        $prompt.appendChild($nameInput)
+        $prompt.appendChild($confirm)
+        $prompt.appendChild($cancel)
+        
+        $filter.appendChild($prompt)
+        $body.appendChild($filter)
+
+        $confirm.addEventListener('mousedown', (ev) => {
+            $body.removeChild($filter)
+            resolve($nameInput.value)
+        })
+
+        $cancel.addEventListener('mousedown', (ev) => {
+            $body.removeChild($filter)
+            reject(null)
+        })
+    })
+}
 
 function updateTables(){
     while($tablesTable.children.length > 0){
@@ -226,6 +350,32 @@ function createMask(blur,darkness){
     $mask.setAttribute('id','mask')
     return $mask
 }
+function loadProfiles(){
+    window.electronAPI.loadProfiles()
+}
+function renderProfiles(){
+    while($dropdownContent.children.length > 0){
+        $dropdownContent.removeChild($dropdownContent.firstChild)
+    }
+    for(p in profiles){
+        const item = document.createElement('div')
+        item.classList.add('dropdownItem')
+        item.setAttribute('id',`p${profiles[p].id}`)
+        item.innerHTML = profiles[p].name
+
+        item.addEventListener('mousedown', (ev) => {
+            const elID = (ev.target.id).replace('p','')
+            const searchObject = profiles.findIndex(x => x.id == elID)
+            $databasePath.value = profiles[searchObject].path
+            $userInput.value = profiles[searchObject].user
+            $passwordInput.value = profiles[searchObject].pass
+            $dropbtn.innerHTML = profiles[searchObject].name
+            currentProfile = elID
+        })
+
+        $dropdownContent.appendChild(item)
+    }
+}
 function printProgress(current,total){
     const $container = document.getElementById('mask')
     const $block = document.createElement('div')
@@ -283,6 +433,7 @@ function printProgress(current,total){
 }
 function start(){
     $body.appendChild(createMask(4,1))
+    loadProfiles()
 }
 
 start()

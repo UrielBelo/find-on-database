@@ -1,8 +1,6 @@
 # Find-on-Database 🖥️
 
->Vamos primeiramente ao problema que deve ser solucionado, eu trabalho em uma empresa que utiliza muito código legado, baseado em Delphi e Firebird, e nossos sistemas possuim bases de dados monstruosamente grandes, e um tanto quanto mal organizadas, quando um dos técnicos vai fazer alguma correção, existe um trabalho imenso para localizar qual tabela ele deve alterar, qual coluna, e algo que facilitaria bastante seria localizar uma coluna por determinado registro, por exemplo: Eu sei que o valor que está no banco de Dados é: "José Luiz Antônio Boasnovas", qual coluna e em qual tabela esse valor está armazenado? 
-
-Posteriormente eu vou implementar algumas funções de _Listeners_, para identificar as tabelas que sofreram alterações em determinado espaço de tempo, algumas funções de descriptografia, um pequeno banco de memória, e tudo isso, para ser facilmente utilizado pelos técnicos, vai possuir uma interface gráfica linda construida e em _Electron_.
+>Vamos primeiramente ao problema que deve ser solucionado, eu trabalho com manutenção e suporte técnico de softwares desenvolvidos em Delphi, e usam por SGBD o Firebird, no meio em que eu trabalho é natural se deparar com bases de dados imensas, e por mais que eu esteja vendo uma informação no sistema, é raro lembrar imediatamente em qual tabela e em qual coluna aquela informação fica armazenada, já que infelizmente eu não tenho um mapeamento dos DBs nos quais eu dou manutenção, resta o dito popular brasileiro: _Quem não tem 🐶 caça com o 🐶_
 
 ### **Bora programar então!!🚀👨‍💻**
 
@@ -14,10 +12,14 @@ Posteriormente eu vou implementar algumas funções de _Listeners_, para identif
 
 ### Node-Firebird (Meu Salva-Vidas)♒
 
-Como já disse, trabalho com tecnologias bem antigas, não porque quero, mas, preciso me virar com o que tenho, e pra mim, não é vantajoso aprender a programar em Pascal só pra fazer Duplinha com o Firebird como era a 20 anos atrás, todavia algum sujeito muito bondozo criou essa Lib fantástica que me permite conectar em bancos Firebird utilizando o Node.JS
+Eu vim de um mundo de aplicações Web, utilizando HTML, CSS e JS, então eu cai de paraquedas no mundo do back-end, e confesso, o Node.JS foi o meu salvador, consegui aproveitar muitos conhecimentos que já tinha em JS para utilizá-los no lado do servidor, facilmente encontrei uma lib fantástica para gerenciar bancos firebird, vou deixar todos os créditos ao autor
 
 [Link para o página Inicial do repositório do Projeto](https://github.com/hgourvest/node-firebird)
 
-**Não recomendo ninguém a utilizar Firebird pelo século XXI! Não façam isso! Por mais que Firebird seja gratuito e consideravelmente leve, ele possui graves falhas de Segurança. Como uma vez disse o sábio:**
+**Não recomendo ninguém a utilizar Firebird pleno século XXI! Não façam isso! Por mais que Firebird seja gratuito e consideravelmente leve, ele possui graves falhas de Segurança e gerenciamento de memória. Como uma vez disse o sábio:**
 
 >Não é o mais forte que sobrevive, nem o mais inteligente, mas o que melhor se adapta às mudanças. (MEGGINSON, 1963)
+
+### Electron.JS
+
+Eu sou apaixonado por esse framework, como já disse, eu vim de um mundo front-end, gosto de interfaces bonitas, conceitos de UX/UI, cores, animações, desenvolver aplicações desktop sem necessidade de utilizar a biblioteca padrão do windows, com aqueles botões feitos, várias boxs cheias de out-lines e bordas quadradas, enfim... O Electron é perfeito! Completa para as mais diversas necessidades do desenvolvimento aplicações Desktop.

@@ -59,19 +59,58 @@ input:focus{
     border-radius: 10px;
     border: 1px solid white;
     display: grid;
-    grid-template-columns: 216px 37px;
+    grid-template-columns: 179px 37px 37px;
 }
-#list{
-   padding: 4px; 
-   border: 1px solid white;
-   border-radius: 10px 0px 0px 10px;
-}
-#arrow{
-    border: 1px solid white;
-    border-radius: 0px 10px 10px 0px;
+.profileFunctionItem{
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 700;
+    border: 1px solid white;
+    cursor: pointer;
+}
+#addProfile{
+    border-radius: 0px 10px 10px 0px;
+}
+#dropbtn{
+    border: 1px solid white;
+    border-radius: 10px 0px 0px 10px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+#dropdownContent{
+    display: none;
+    position: absolute;
+    left: 430px;
+    background-color: #FCFCFC;
+    min-width: 179px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;  
+    border-radius: 10px; 
+}
+.dropdownItem{
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40px;
+    border-bottom: 1px solid #DDD;
+    border-top: 1px solid #DDD;
+    cursor: pointer;
+    background-color: rgba(210, 210, 210, 0.2);
+}
+.dropdownItem:hover{
+    background-color: rgba(210, 210, 210, 0.5);
+}
+#dropdown:hover #dropdownContent{
+    display: block;
+}
+#dropdown:hover #dropbtn{
+    background-color: #D9D9D9;
 }
 
 #connectionInfo{
@@ -195,6 +234,7 @@ input:focus{
     border-right: 1px solid black;
     border-bottom: 1px solid black;
     border-radius: 0px 5px 5px 0px;
+    cursor: pointer;
     width: 50px;
     height: 28px;
 }
@@ -230,29 +270,6 @@ input:focus{
     position: relative;
     outline: 1px solid orange;
     top: 2px
-}
-#selectors #dbLister{
-    display: flex;
-}
-#selectors #dbLister #log{
-    background-color: #FFFFFF;
-    width: 228px;
-    height: 32px;
-    border-radius: 10px 0px 0px 10px;
-    overflow: hidden;
-}
-#selectors #dbLister #listerButtons{
-    background-color: #D9D9D9;
-    border-radius: 0px 10px 10px 0px;
-    width: 120px;
-    height: 32px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-#selectors #dbLister #listerButtons button{
-    background-color: transparent;
-    border: 0;
 }
 
 #tables{
@@ -316,7 +333,7 @@ input:focus{
 }
 
 footer{
-    margin-top: 1.3vh;
+    margin-top: 4.8vh;
     background-color: #D9D9D9;
     height: 23px;
     display: flex;
@@ -326,4 +343,35 @@ footer{
 footer b a{
     text-decoration: none;
     color: #444;
+}
+
+/*Prompt*/
+#namePrompt input{
+    width: 270px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: white;
+    border-radius: 10px 0px 0px 10px;
+    padding-left: 15px;
+    border: 1px solid black;
+}
+#namePrompt button{
+    width: 40px;
+    height: 50px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    position: relative;
+    top: 12px;
+    cursor: pointer;
+}
+#namePrompt .confirm{
+    border-left: 0;
+    border-right: 1px solid black;
+    background-color: lime;
+}
+#namePrompt .cancel{
+    border-left: 0;
+    background-color: red;
+    border-right: 1px solid black;
+    border-radius: 0px 10px 10px 0px;
 }
