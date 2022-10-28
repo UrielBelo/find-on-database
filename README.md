@@ -4,7 +4,7 @@
 
 ### **Bora programar então!!🚀👨‍💻**
 
-![Gatinho de Óculos olhando pro Notebook](https://c.tenor.com/29Ok5pc0ivAAAAAd/gatinho-gato.gif)
+![Gatinho de Óculos olhando pro Notebook](https://media.tenor.com/29Ok5pc0ivAAAAAM/gatinho-gato.gif)
 
 <hr>
 
