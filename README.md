@@ -22,4 +22,4 @@ Eu vim de um mundo de aplicações Web, utilizando HTML, CSS e JS, então eu cai
 
 ### Electron.JS
 
-Eu sou apaixonado por esse framework, como já disse, eu vim de um mundo front-end, gosto de interfaces bonitas, conceitos de UX/UI, cores, animações, desenvolver aplicações desktop sem necessidade de utilizar a biblioteca padrão do windows, com aqueles botões feitos, várias boxs cheias de out-lines e bordas quadradas, enfim... O Electron é perfeito! Completa para as mais diversas necessidades do desenvolvimento aplicações Desktop.
+Eu sou apaixonado por esse framework, como já disse, eu vim de um mundo front-end, gosto de interfaces bonitas, conceitos de UX/UI, cores, animações, desenvolver aplicações desktop sem necessidade de utilizar a biblioteca padrão do windows, com aqueles botões feitos, várias boxs cheias de out-lines e bordas quadradas, enfim... O Electron é perfeito! Completa para as mais diversas necessidades do desenvolvimento de aplicações Desktop.
