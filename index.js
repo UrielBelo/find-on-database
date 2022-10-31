@@ -11,9 +11,9 @@ const key = 'HellOWorld'
 
 module.paths.push(path.resolve('node_modules'))
 module.paths.push(path.resolve('../node_modules'))
-require('electron-reload')(__dirname,{
-    electron: require(`${__dirname}/node_modules/electron`)
-})
+// require('electron-reload')(__dirname,{
+//     electron: require(`${__dirname}/node_modules/electron`)
+// })
 
 const db = new sqlite3.Database('./profiles.db', sqlite3.OPEN_READWRITE, (err) => {
     if(err && err.code == 'SQLITE_CANTOPEN'){
